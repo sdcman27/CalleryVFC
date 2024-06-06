@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Moderator Homepage</title>
+	   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	   <meta name="_csrf" th:content="${_csrf.token}" />
+	   <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+	   <script>
+	       function handleLogout(event) {
+	           event.preventDefault();
+	           const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+	           const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+	           fetch('/logout', {
+	               method: 'POST',
+	               headers: {
+	                   'Content-Type': 'application/x-www-form-urlencoded',
+	                   [csrfHeader]: csrfToken
+	               },
+	           }).then(response => {
+	               if (response.ok) {
+	                   window.location.href = '/home';
+	               }
+	           });
+	       }
+	   </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Moderator Homepage</h1>
+        <!-- Moderator-specific content -->
+        <a href="#" class="btn btn-primary" onclick="handleLogout(event)">Logout</a>
+    </div>
+</body>
+</html>
