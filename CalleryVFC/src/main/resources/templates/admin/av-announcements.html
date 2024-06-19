@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Announcements</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Announcements</h1>
+        <a href="/admin/av-announcements/new">Create New Announcement</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="announcement : ${announcements}">
+                    <td th:text="${announcement.id}"></td>
+                    <td th:text="${announcement.title}"></td>
+                    <td>
+                        <a th:href="@{/admin/av-announcements/edit/{id}(id=${announcement.id})}">Edit</a>
+                        <a th:href="@{/admin/av-announcements/delete/{id}(id=${announcement.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(announcements)}">
+                    <td colspan="3">No announcements available.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
