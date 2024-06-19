@@ -1,7 +1,11 @@
 package com.example.demo.init;
 
+import com.example.demo.model.Announcement;
+import com.example.demo.model.Newsletter;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import com.example.demo.repository.AnnouncementRepository;
+import com.example.demo.repository.NewsletterRepository;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import jakarta.transaction.Transactional;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +33,12 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private RoleRepository roleRepository;
+    
+    @Autowired
+    private AnnouncementRepository announcementRepository;
+    
+    @Autowired
+    private NewsletterRepository newsletterRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -69,6 +80,22 @@ public class DataInitializer implements CommandLineRunner {
             moderatorRoles.add(moderatorRole);
             moderator.setRoles(moderatorRoles);
             userRepository.save(moderator);
+            
+         // Add sample announcements
+            Announcement announcement1 = new Announcement();
+            announcement1.setTitle("Welcome to the Fire Department");
+            announcement1.setContent("This is an announcement for the new members.");
+            announcement1.setDateTime(LocalDateTime.now());
+            announcement1.setUser(admin);
+            announcementRepository.save(announcement1);
+
+            Announcement announcement2 = new Announcement();
+            announcement2.setTitle("Training Session");
+            announcement2.setContent("There will be a training session next week.");
+            announcement2.setDateTime(LocalDateTime.now());
+            announcement2.setUser(moderator);
+            announcementRepository.save(announcement2);
+            
         }
     }
 
