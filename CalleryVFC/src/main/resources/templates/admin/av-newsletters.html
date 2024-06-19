@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Newsletters</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Newsletters</h1>
+		<a href="/admin">Return to Admin Dashboard</a>
+        <a href="/admin/av-send_test_email">Create New Newsletter</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Send Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="newsletter : ${newsletters}">
+                    <td th:text="${newsletter.id}"></td>
+                    <td th:text="${newsletter.subject}"></td>
+                    <td th:text="${newsletter.sendDateTime}"></td>
+                    <td>
+                        <a th:href="@{/admin/av-newsletters/edit/{id}(id=${newsletter.id})}">Edit</a>
+                        <a th:href="@{/admin/av-newsletters/delete/{id}(id=${newsletter.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(newsletters)}">
+                    <td colspan="4">No newsletters available.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

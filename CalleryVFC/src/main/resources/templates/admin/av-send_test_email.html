@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Send Test Email</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Send Test Email</h1>
+        <form th:action="@{/admin/av-send_test_email}" method="post">
+            <div>
+                <label for="to">To:</label>
+                <input type="email" id="to" name="to"/>
+            </div>
+            <div>
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" value="Test Email" />
+            </div>
+            <div>
+                <label for="content">Content:</label>
+                <textarea id="content" name="content">This is a test email.</textarea>
+            </div>
+            <div>
+                <label for="schedule">Schedule Email:</label>
+                <input type="radio" id="send_now" name="schedule" value="now" checked onclick="toggleSchedule(false)"> Send Now
+                <input type="radio" id="send_later" name="schedule" value="later" onclick="toggleSchedule(true)"> Send Later
+            </div>
+            <div id="schedule_options" style="display: none;">
+                <label for="sendDateTime">Send Date and Time:</label>
+                <input type="datetime-local" id="sendDateTime" name="sendDateTime" />
+            </div>
+            <div>
+                <input type="checkbox" id="includeSubscribers" name="includeSubscribers" onclick="toggleToField()">
+                <label for="includeSubscribers">Include Subscribers</label>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+    </div>
+    <script>
+        function toggleSchedule(show) {
+            var scheduleOptions = document.getElementById('schedule_options');
+            scheduleOptions.style.display = show ? 'block' : 'none';
+        }
+        
+        function toggleToField() {
+            var toField = document.getElementById('to');
+            var includeSubscribers = document.getElementById('includeSubscribers');
+            toField.disabled = includeSubscribers.checked;
+            if (includeSubscribers.checked) {
+                toField.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
