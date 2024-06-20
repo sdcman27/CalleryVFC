@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException; 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,16 +19,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Announcement;
+import com.example.demo.model.Equipment;
+import com.example.demo.model.MaintenanceSchedule;
 import com.example.demo.model.Newsletter;
 import com.example.demo.model.NewsletterSubscriber;
+import com.example.demo.model.SystemUsage;
 import com.example.demo.model.User;
 import com.example.demo.model.UserActivity;
 import com.example.demo.repository.AnnouncementRepository;
+import com.example.demo.repository.EquipmentRepository;
+import com.example.demo.repository.MaintenanceScheduleRepository;
 import com.example.demo.repository.NewsletterRepository;
 import com.example.demo.repository.NewsletterSubscriberRepository;
 import com.example.demo.repository.UserActivityRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.BackupService;
 import com.example.demo.service.EmailService;
+import com.example.demo.service.SystemSettingService;
+import com.example.demo.service.SystemUsageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -50,6 +59,21 @@ public class AdminController {
 	
 	@Autowired
     private UserActivityRepository userActivityRepository;
+	
+    @Autowired
+    private SystemUsageService systemUsageService;
+    
+    @Autowired
+    private SystemSettingService systemSettingService;
+
+    @Autowired
+    private BackupService backupService;
+    
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+
+    @Autowired
+    private MaintenanceScheduleRepository maintenanceScheduleRepository;
 
     @GetMapping
     public String adminHome() {
@@ -233,11 +257,140 @@ public class AdminController {
         return "admin/av-send_test_email";
     }
     
-    @GetMapping("/admin/user-activity")
+    
+    @GetMapping("/av-user_activity")
     public String viewUserActivity(Model model) {
         List<UserActivity> activities = userActivityRepository.findAll();
         model.addAttribute("activities", activities);
-        return "admin/user-activity";
+        return "admin/av-user_activity";
+    }
+    
+    @GetMapping("/av-system_usage")
+    public String systemUsage(Model model) {
+        List<SystemUsage> usageStats = systemUsageService.getAllUsage();
+        model.addAttribute("usageStats", usageStats);
+        return "admin/av-system_usage";
+    }
+    
+    @GetMapping("/av-settings")
+    public String showSettings(Model model) {
+        model.addAttribute("settings", systemSettingService.getAllSettings());
+        return "admin/av-settings";
+    }
+
+    @PostMapping("/av-settings")
+    public String updateSettings(@RequestParam("key") String key,
+                                 @RequestParam("value") String value,
+                                 Model model) {
+        systemSettingService.updateSetting(key, value);
+        model.addAttribute("settings", systemSettingService.getAllSettings());
+        model.addAttribute("message", "Setting updated successfully");
+        return "admin/av-settings";
+    }
+
+    @GetMapping("/av-backup")
+    public String backup() {
+        return "admin/av-backup";
+    }
+
+    @PostMapping("/av-backup")
+    public String performBackup(Model model) {
+        try {
+            backupService.backupDatabase();
+            model.addAttribute("message", "Backup created successfully, please check your downloads folder!");
+        } catch (IOException e) {
+            model.addAttribute("error", "Error creating backup: " + e.getMessage());
+        }
+        return "admin/av-backup";
+    }
+
+    @PostMapping("/av-restore")
+    public String performRestore(Model model) {
+        try {
+            backupService.restoreDatabase();
+            model.addAttribute("message", "Database restored successfully!");
+        } catch (IOException e) {
+            model.addAttribute("error", "Error restoring database: " + e.getMessage());
+        }
+        return "admin/av-backup";
+    }
+
+    @GetMapping("/av-equipment")
+    public String listEquipment(Model model) {
+        List<Equipment> equipmentList = equipmentRepository.findAll();
+        model.addAttribute("equipmentList", equipmentList);
+        return "admin/av-equipment";
+    }
+
+    @GetMapping("/av-equipment/new")
+    public String showCreateEquipmentForm(Model model) {
+        model.addAttribute("equipment", new Equipment());
+        return "admin/av-create_equipment";
+    }
+
+    @PostMapping("/av-equipment")
+    public String createEquipment(@ModelAttribute Equipment equipment) {
+        equipmentRepository.save(equipment);
+        return "redirect:/admin/av-equipment";
+    }
+
+    @GetMapping("/av-equipment/edit/{id}")
+    public String showEditEquipmentForm(@PathVariable("id") Long id, Model model) {
+        Equipment equipment = equipmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid equipment Id:" + id));
+        model.addAttribute("equipment", equipment);
+        return "admin/av-edit_equipment";
+    }
+
+    @PostMapping("/av-equipment/update/{id}")
+    public String updateEquipment(@PathVariable("id") Long id, @ModelAttribute Equipment equipment) {
+        equipmentRepository.save(equipment);
+        return "redirect:/admin/av-equipment";
+    }
+
+    @GetMapping("/av-equipment/delete/{id}")
+    public String deleteEquipment(@PathVariable("id") Long id) {
+        Equipment equipment = equipmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid equipment Id:" + id));
+        equipmentRepository.delete(equipment);
+        return "redirect:/admin/av-equipment";
+    }
+
+    @GetMapping("/av-maintenance")
+    public String listMaintenanceSchedules(Model model) {
+        List<MaintenanceSchedule> maintenanceList = maintenanceScheduleRepository.findAll();
+        model.addAttribute("maintenanceList", maintenanceList);
+        return "admin/av-maintenance";
+    }
+
+    @GetMapping("/av-maintenance/new")
+    public String showCreateMaintenanceForm(Model model) {
+        model.addAttribute("maintenanceSchedule", new MaintenanceSchedule());
+        return "admin/av-create_maintenance";
+    }
+
+    @PostMapping("/av-maintenance")
+    public String createMaintenance(@ModelAttribute MaintenanceSchedule maintenanceSchedule) {
+        maintenanceScheduleRepository.save(maintenanceSchedule);
+        return "redirect:/admin/av-maintenance";
+    }
+
+    @GetMapping("/av-maintenance/edit/{id}")
+    public String showEditMaintenanceForm(@PathVariable("id") Long id, Model model) {
+        MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid maintenance Id:" + id));
+        model.addAttribute("maintenanceSchedule", maintenanceSchedule);
+        return "admin/av-edit_maintenance";
+    }
+
+    @PostMapping("/av-maintenance/update/{id}")
+    public String updateMaintenance(@PathVariable("id") Long id, @ModelAttribute MaintenanceSchedule maintenanceSchedule) {
+        maintenanceScheduleRepository.save(maintenanceSchedule);
+        return "redirect:/admin/av-maintenance";
+    }
+
+    @GetMapping("/av-maintenance/delete/{id}")
+    public String deleteMaintenance(@PathVariable("id") Long id) {
+        MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid maintenance Id:" + id));
+        maintenanceScheduleRepository.delete(maintenanceSchedule);
+        return "redirect:/admin/av-maintenance";
     }
 
 }

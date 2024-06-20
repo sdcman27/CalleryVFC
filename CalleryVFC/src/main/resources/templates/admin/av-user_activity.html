@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Activity Logs</title>
+</head>
+<body>
+    <div class="container">
+        <h1>User Activity Logs</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="activity : ${activities}">
+                    <td th:text="${activity.id}"></td>
+                    <td th:text="${activity.username}"></td>
+                    <td th:text="${activity.action}"></td>
+                    <td th:text="${activity.timestamp}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(activities)}">
+                    <td colspan="4">No activities recorded.</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin">Back to Admin Panel</a>
+    </div>
+</body>
+</html>

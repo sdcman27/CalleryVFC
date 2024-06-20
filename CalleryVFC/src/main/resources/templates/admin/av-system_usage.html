@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>System Usage Statistics</title>
+</head>
+<body>
+    <div class="container">
+        <h1>System Usage Statistics</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usage : ${usageStats}">
+                    <td th:text="${usage.metric}"></td>
+                    <td th:text="${usage.value}"></td>
+                    <td th:text="${usage.timestamp}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(usageStats)}">
+                    <td colspan="3">No usage statistics available.</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin">Back to Admin Panel</a>
+    </div>
+</body>
+</html>
