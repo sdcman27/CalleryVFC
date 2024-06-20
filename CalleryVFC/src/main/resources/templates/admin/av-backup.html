@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Backup and Restore</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Backup and Restore</h1>
+        <form th:action="@{/admin/av-backup}" method="post">
+            <button type="submit">Create Backup</button>
+        </form>
+        <form th:action="@{/admin/av-restore}" method="post">
+            <button type="submit">Restore Backup</button>
+        </form>
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+        <div th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+        <a href="/admin">Back to Admin Panel</a>
+    </div>
+</body>
+</html>
