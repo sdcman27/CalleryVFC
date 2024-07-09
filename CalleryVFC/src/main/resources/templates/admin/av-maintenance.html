@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Maintenance Schedule Management</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Maintenance Schedule Management</h1>
+        <a href="/admin/av-maintenance/new">Create New Maintenance Schedule</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Equipment Name</th>
+                    <th>Maintenance Date</th>
+                    <th>Details</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="maintenance : ${maintenanceList}">
+                    <td th:text="${maintenance.id}"></td>
+                    <td th:text="${maintenance.equipmentName}"></td>
+                    <td th:text="${maintenance.maintenanceDate}"></td>
+                    <td th:text="${maintenance.details}"></td>
+                    <td>
+                        <a th:href="@{/admin/av-maintenance/edit/{id}(id=${maintenance.id})}">Edit</a>
+                        <a th:href="@{/admin/av-maintenance/delete/{id}(id=${maintenance.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin">Back to Admin Panel</a>
+    </div>
+</body>
+</html>
