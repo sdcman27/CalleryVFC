@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>System Settings</title>
+</head>
+<body>
+    <div class="container">
+        <h1>System Settings</h1>
+        <form th:action="@{/admin/settings}" method="post">
+            <div th:each="setting : ${settings}">
+                <label th:for="${setting.settingKey}" th:text="${setting.settingKey}"></label>
+                <input type="text" th:id="${setting.settingKey}" th:name="value" th:value="${setting.settingValue}"/>
+                <input type="hidden" th:name="key" th:value="${setting.settingKey}"/>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+        <a href="/admin">Back to Admin Panel</a>
+    </div>
+</body>
+</html>
