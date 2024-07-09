@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Equipment</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Equipment</h1>
+        <form th:action="@{/admin/av-equipment}" method="post">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"/>
+            </div>
+            <div>
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="type"/>
+            </div>
+            <div>
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status"/>
+            </div>
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location"/>
+            </div>
+            <div>
+                <button type="submit">Add Equipment</button>
+            </div>
+        </form>
+        <a href="/admin/av-equipment">Back to Equipment List</a>
+    </div>
+</body>
+</html>
