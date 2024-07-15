@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Announcement</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Announcement</h1>
+        <form th:action="@{'/moderator/announcement/update/' + ${announcement.id}}" th:object="${announcement}" method="post">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:field="*{title}" required>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" th:field="*{content}" required></textarea>
+            <label for="dateTime">Date and Time:</label>
+            <input type="datetime-local" id="dateTime" name="dateTime" th:field="*{dateTime}" required>
+            <label for="imageUrl">Image URL:</label>
+            <input type="url" id="imageUrl" name="imageUrl" th:field="*{imageUrl}">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</body>
+</html>

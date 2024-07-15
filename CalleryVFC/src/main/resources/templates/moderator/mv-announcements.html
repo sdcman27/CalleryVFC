@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Announcements</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Announcements</h1>
+        <a href="/moderator/announcement/new" class="btn btn-primary">Create New Announcement</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="announcement : ${announcements}">
+                    <td th:text="${announcement.title}">Title</td>
+                    <td th:text="${announcement.content}">Content</td>
+                    <td th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Date</td>
+                    <td>
+                        <a th:href="@{'/moderator/announcement/edit/' + ${announcement.id}}" class="btn btn-secondary">Edit</a>
+                        <form th:action="@{'/moderator/announcement/delete/' + ${announcement.id}}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
