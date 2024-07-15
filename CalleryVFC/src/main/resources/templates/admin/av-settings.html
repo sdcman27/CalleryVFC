@@ -6,6 +6,8 @@
 <body>
     <div class="container">
         <h1>System Settings</h1>
+		<a href="/admin">Return to Admin Dashboard</a>
+
         <form th:action="@{/admin/settings}" method="post">
             <div th:each="setting : ${settings}">
                 <label th:for="${setting.settingKey}" th:text="${setting.settingKey}"></label>
@@ -17,7 +19,6 @@
         <div th:if="${message}">
             <p th:text="${message}"></p>
         </div>
-        <a href="/admin">Back to Admin Panel</a>
     </div>
 </body>
 </html>

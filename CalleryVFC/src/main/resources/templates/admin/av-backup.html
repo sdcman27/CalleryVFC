@@ -6,6 +6,8 @@
 <body>
     <div class="container">
         <h1>Backup and Restore</h1>
+		<a href="/admin">Return to Admin Dashboard</a>
+
         <form th:action="@{/admin/av-backup}" method="post">
             <button type="submit">Create Backup</button>
         </form>
@@ -18,7 +20,6 @@
         <div th:if="${error}">
             <p th:text="${error}"></p>
         </div>
-        <a href="/admin">Back to Admin Panel</a>
     </div>
 </body>
 </html>
