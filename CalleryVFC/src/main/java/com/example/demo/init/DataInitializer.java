@@ -3,10 +3,12 @@ package com.example.demo.init;
 import com.example.demo.model.Announcement;
 import com.example.demo.model.Newsletter;
 import com.example.demo.model.Role;
+import com.example.demo.model.SystemSetting;
 import com.example.demo.model.User;
 import com.example.demo.repository.AnnouncementRepository;
 import com.example.demo.repository.NewsletterRepository;
 import com.example.demo.repository.RoleRepository;
+import com.example.demo.repository.SystemSettingRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -39,6 +41,9 @@ public class DataInitializer implements CommandLineRunner {
     
     @Autowired
     private NewsletterRepository newsletterRepository;
+    
+    @Autowired
+    private SystemSettingRepository systemSettingRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -81,7 +86,7 @@ public class DataInitializer implements CommandLineRunner {
             moderator.setRoles(moderatorRoles);
             userRepository.save(moderator);
             
-         // Add sample announcements
+            // Add sample announcements
             Announcement announcement1 = new Announcement();
             announcement1.setTitle("Welcome to the Fire Department");
             announcement1.setContent("This is an announcement for the new members.");
@@ -95,7 +100,13 @@ public class DataInitializer implements CommandLineRunner {
             announcement2.setDateTime(LocalDateTime.now());
             announcement2.setUser(moderator);
             announcementRepository.save(announcement2);
-            
+        }
+
+        if (systemSettingRepository.findAll().isEmpty()) {
+            systemSettingRepository.save(new SystemSetting("site_title", "My Fire Department"));
+            systemSettingRepository.save(new SystemSetting("maintenance_mode", "false"));
+            systemSettingRepository.save(new SystemSetting("default_user_role", "ROLE_USER"));
+            systemSettingRepository.save(new SystemSetting("email_notifications", "enabled"));
         }
     }
 
