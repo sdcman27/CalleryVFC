@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fireman Applications</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fireman Applications</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Experience</th>
+                    <th>Motivation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="applications : ${applications}">
+                    <td th:text="${applications.name}"></td>
+                    <td th:text="${applications.email}"></td>
+                    <td th:text="${applications.phone}"></td>
+                    <td th:text="${applications.address}"></td>
+                    <td th:text="${applications.experience}"></td>
+                    <td th:text="${applications.motivation}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
