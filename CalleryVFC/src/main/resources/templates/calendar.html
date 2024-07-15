@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hall Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hall Calendar</h1>
+        <div id="calendar"></div>
+        <h2>Rental Inquiry</h2>
+        <form th:action="@{/inquiry}" method="post" th:object="${rentalInquiry}">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="*{name}" required/>
+            </div>
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" th:field="*{startDate}" required/>
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" th:field="*{endDate}" required/>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" required/>
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" th:field="*{phone}" required/>
+            </div>
+            <div>
+                <label for="additionalInfo">Additional Info:</label>
+                <textarea id="additionalInfo" th:field="*{additionalInfo}"></textarea>
+            </div>
+            <div>
+                <button type="submit">Submit Inquiry</button>
+            </div>
+        </form>
+        <a href="/">Back to Home</a>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var events = /*[[${bookings}]]*/ [];
+            $('#calendar').fullCalendar({
+				events: events.map(function(booking) {
+				                    if (booking.status === 'ACCEPTED') {
+				                        return {
+				                            title: 'Hall Booked',
+				                            start: booking.startDate,
+				                            end: booking.endDate
+				                        };
+				                    }
+				                    return null;
+				                }).filter(event => event !== null),
+				                displayEventTime: false
+				            });
+				        });
+    </script>
+</body>
+</html>
