@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Moderator Inquiries</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Pending Rental Inquiries</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Additional Info</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inquiry : ${inquiries}">
+                    <td th:text="${inquiry.name}"></td>
+                    <td th:text="${inquiry.startDate}"></td>
+                    <td th:text="${inquiry.endDate}"></td>
+                    <td th:text="${inquiry.email}"></td>
+                    <td th:text="${inquiry.phone}"></td>
+                    <td th:text="${inquiry.additionalInfo}"></td>
+                    <td th:text="${inquiry.status}"></td>
+                    <td>
+                        <form th:action="@{/moderator/inquiry/accept}" method="post">
+                            <input type="hidden" name="id" th:value="${inquiry.id}" />
+                            <button type="submit">Accept</button>
+                        </form>
+                        <form th:action="@{/moderator/inquiry/decline}" method="post">
+                            <input type="hidden" name="id" th:value="${inquiry.id}" />
+                            <button type="submit">Decline</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
