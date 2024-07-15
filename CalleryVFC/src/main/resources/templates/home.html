@@ -9,7 +9,20 @@
         <h1>Welcome to the Fire Department Website</h1>
         <a href="/login" class="btn btn-primary">Login</a>
         <a href="/subscribe" class="btn btn-secondary">Subscribe to Newsletter</a>
-        <!-- Other content for the homepage -->
+		<a href="/calendar" class="btn btn-secondary">Rentals</a>
+		<a href="/apply" class="btn btn-secondary">Become a fireman</a>
+
+		<div>
+		    <h2>Announcements</h2>
+		    <div th:each="announcement : ${announcements}">
+		        <h3 th:text="${announcement.title}">Announcement Title</h3>
+		        <p th:text="${announcement.content}">Announcement Content</p>
+		        <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
+		        <div th:if="${announcement.imageUrl}">
+		           <img th:src="${announcement.imageUrl}" alt="Announcement Image"/>
+		        </div>
+		    </div>
+		</div>
     </div>
 </body>
 </html>
