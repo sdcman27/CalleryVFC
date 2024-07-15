@@ -8,9 +8,73 @@ body {
     margin: 0;
 }
 
+.admin-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h1, .admin-container h2 {
+    text-align: center;
+}
+
+.admin-nav-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-nav-links li {
+    margin: 10px 0;
+}
+
+.admin-nav-links a, .admin-btn {
+    display: block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.admin-btn-secondary {
+    background-color: #6c757d;
+}
+
+.admin-announcements {
+    margin-top: 20px;
+}
+
+.admin-announcement-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.admin-announcement-item h3 {
+    margin: 0;
+}
+
+.admin-announcement-item p {
+    margin: 5px 0;
+}
+
+.admin-announcement-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+.admin-logout-btn {
+    background-color: #dc3545;
+}
+
 .container {
     width: 100%;
-    max-width: 400px;
+    max-width: auto;
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

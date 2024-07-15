@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.config.PasswordEncoderConfig;
 import com.example.demo.model.Announcement;
 import com.example.demo.model.Equipment;
 import com.example.demo.model.MaintenanceSchedule;
@@ -33,6 +35,7 @@ import com.example.demo.repository.NewsletterRepository;
 import com.example.demo.repository.NewsletterSubscriberRepository;
 import com.example.demo.repository.UserActivityRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.AnnouncementService;
 import com.example.demo.service.BackupService;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.SystemSettingService;
@@ -70,13 +73,20 @@ public class AdminController {
     private BackupService backupService;
     
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
+    @Autowired
     private EquipmentRepository equipmentRepository;
+    
+    @Autowired
+    private AnnouncementService announcementService;
 
     @Autowired
     private MaintenanceScheduleRepository maintenanceScheduleRepository;
 
     @GetMapping
-    public String adminHome() {
+    public String adminHome(Model model) {
+    	model.addAttribute("announcements", announcementService.getAllAnnouncements());
         return "admin/admin";
     }
     
@@ -107,8 +117,17 @@ public class AdminController {
     }
 
     @PostMapping("/user_list/update/{id}")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute User user) {
-        userRepository.save(user);
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute User user, @RequestParam("password") String password) {
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        existingUser.setUsername(user.getUsername());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+
+        if (password != null && !password.isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(password));
+        }
+        
+        userRepository.save(existingUser);
         return "redirect:/admin/user_list";
     }
 
