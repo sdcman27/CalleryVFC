@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Admin Homepage</title>
-	    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	    <meta name="_csrf" th:content="${_csrf.token}" />
-	    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-	    <script>
-	        function handleLogout(event) {
-	            event.preventDefault();
-	            const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-	            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+    <title>Admin Homepage</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <script>
+        function handleLogout(event) {
+            event.preventDefault();
+            const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-	            fetch('/logout', {
-	                method: 'POST',
-	                headers: {
-	                    'Content-Type': 'application/x-www-form-urlencoded',
-	                    [csrfHeader]: csrfToken
-	                },
-	            }).then(response => {
-	                if (response.ok) {
-	                    window.location.href = '/home';
-	                }
-	            });
-	        }
-	    </script>
-	</head>
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    [csrfHeader]: csrfToken
+                },
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '/home';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="admin-container">
         <h1>Admin Homepage</h1>
-        <ul class="admin-nav-links">
-            <li><a href="/admin/user_list">Manage Users</a></li>
-            <li><a href="/admin/av-announcements">Manage Announcements</a></li>
-            <li><a href="/admin/av-newsletters">Manage Newsletters</a></li>
-            <li><a href="/admin/av-user_activity">View Activity: Log in Attempts</a></li>
-            <li><a href="/admin/av-system_usage">View Activity: System Usage Statistics</a></li>
-            <li><a href="/admin/av-settings">System Settings</a></li>
-            <li><a href="/admin/av-backup">Backup and Restore</a></li>
-            <li><a href="/admin/av-maintenance">Maintenance Tracking</a></li>
-            <li><a href="/admin/av-equipment">Equipment Tracking</a></li>
-        </ul>
-        <a href="#" class="admin-btn admin-logout-btn" onclick="handleLogout(event)">Logout</a>
+        <nav class="primary-navigation admin-nav">
+            <ul class="admin-nav-links">
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">User Management &dtrif;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/admin/user_list">Manage Users</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Send Notifications &dtrif;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/admin/av-announcements">Manage Announcements</a></li>
+                        <li><a href="/admin/av-newsletters">Manage Newsletters</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Activity Logging &dtrif;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/admin/av-user_activity">View Activity: Log in Attempts</a></li>
+                        <li><a href="/admin/av-system_usage">View Activity: System Usage Statistics</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Settings &dtrif;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/admin/av-settings">System Settings</a></li>
+                        <li><a href="/admin/av-backup">Backup and Restore</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Tracking &dtrif;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/admin/av-equipment">Equipment Tracking</a></li>
+                        <li><a href="/admin/av-maintenance">Maintenance Tracking</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="admin-btn admin-logout-btn" onclick="handleLogout(event)">Logout</a>
+                </li>
+            </ul>
+        </nav>
 
         <div class="admin-announcements">
             <h2>Announcements</h2>
