@@ -5,24 +5,28 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Welcome to the Fire Department Website</h1>
-        <a href="/login" class="btn btn-primary">Login</a>
-        <a href="/subscribe" class="btn btn-secondary">Subscribe to Newsletter</a>
-		<a href="/calendar" class="btn btn-secondary">Rentals</a>
-		<a href="/apply" class="btn btn-secondary">Become a fireman</a>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/calendar">Rentals</a></li>
+                <li><a href="/subscribe">Newsletter</a></li>
+                <li><a href="/apply">Careers</a></li>
+                <li><a href="/login">Employee Portal</a></li>
+            </ul>
+        </nav>
 
-		<div>
-		    <h2>Announcements</h2>
-		    <div th:each="announcement : ${announcements}">
-		        <h3 th:text="${announcement.title}">Announcement Title</h3>
-		        <p th:text="${announcement.content}">Announcement Content</p>
-		        <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
-		        <div th:if="${announcement.imageUrl}">
-		           <img th:src="${announcement.imageUrl}" alt="Announcement Image"/>
-		        </div>
-		    </div>
-		</div>
+        <div class="fire-dept-announcements">
+            <h2>Announcements</h2>
+            <div th:each="announcement : ${announcements}" class="fire-dept-announcement-item">
+                <h3 th:text="${announcement.title}">Announcement Title</h3>
+                <p th:text="${announcement.content}">Announcement Content</p>
+                <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
+                <div th:if="${announcement.imageUrl}">
+                    <img th:src="${announcement.imageUrl}" alt="Announcement Image"/>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
