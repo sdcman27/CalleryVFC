@@ -5,6 +5,79 @@ body {
     padding: 0;
 }
 
+.fire-dept-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fire-dept-container h1, .fire-dept-container h2 {
+    text-align: center;
+}
+
+.primary-navigation {
+    margin: 0 auto;
+    display: block;
+    padding: 20px 0 0 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.primary-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.primary-navigation ul li {
+    display: inline-block;
+    padding: 0 30px;
+}
+
+.primary-navigation li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.primary-navigation li a:hover {
+    color: #3ca0e7;
+    border-bottom: 2px solid #3ca0e7;
+}
+
+.fire-dept-announcements {
+    margin-top: 20px;
+}
+
+.fire-dept-announcement-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.fire-dept-announcement-item h3 {
+    margin: 0;
+}
+
+.fire-dept-announcement-item p {
+    margin: 5px 0;
+}
+
+.fire-dept-announcement-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+.fire-dept-logout-btn {
+    background-color: #dc3545;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+
 .admin-container {
     width: 80%;
     margin: 0 auto;
