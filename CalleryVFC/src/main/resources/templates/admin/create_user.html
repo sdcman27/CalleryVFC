@@ -10,19 +10,25 @@
         <form th:action="@{/admin/user_list}" th:object="${user}" method="post" class="fire-dept-form">
             <div class="fire-dept-form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" th:field="*{username}" class="fire-dept-input"/>
+                <input type="text" id="username" th:field="*{username}" class="fire-dept-input" required/>
             </div>
             <div class="fire-dept-form-group">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" th:field="*{firstName}" class="fire-dept-input"/>
+                <input type="text" id="firstName" th:field="*{firstName}" class="fire-dept-input" required/>
             </div>
             <div class="fire-dept-form-group">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" th:field="*{lastName}" class="fire-dept-input"/>
+                <input type="text" id="lastName" th:field="*{lastName}" class="fire-dept-input" required/>
             </div>
             <div class="fire-dept-form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" th:field="*{password}" class="fire-dept-input"/>
+                <input type="password" id="password" th:field="*{password}" class="fire-dept-input" required/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="roles">Role:</label>
+                <select id="roles" th:field="*{roles}" multiple="true" class="fire-dept-input" required>
+                    <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}">Role</option>
+                </select>
             </div>
             <div class="fire-dept-form-group">
                 <button type="submit" class="fire-dept-btn">Create</button>
