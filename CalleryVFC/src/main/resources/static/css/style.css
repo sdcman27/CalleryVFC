@@ -1,3 +1,8 @@
+/*
+CSS file
+For homepage
+*/
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
@@ -77,7 +82,9 @@ body {
     cursor: pointer;
 }
 
-
+/*
+For Admin
+*/
 .admin-container {
     width: 80%;
     margin: 0 auto;
@@ -235,4 +242,85 @@ body {
 
 .btn:hover {
     background-color: #0056b3;
+}
+
+/* Reusable Form Styles */
+.fire-dept-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fire-dept-form-group {
+    margin-bottom: 15px;
+}
+
+.fire-dept-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.fire-dept-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.fire-dept-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.fire-dept-btn:hover {
+    background-color: #0056b3;
+}
+
+.fire-dept-btn-secondary {
+    background-color: #6c757d;
+}
+
+.fire-dept-btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Table Styles */
+.fire-dept-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.fire-dept-table th, .fire-dept-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.fire-dept-table th {
+    background-color: #f2f2f2;
+}
+
+.fire-dept-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.fire-dept-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.fire-dept-table a:hover {
+    text-decoration: underline;
 }
