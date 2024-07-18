@@ -2,32 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Create User</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Create User</h1>
-        <form th:action="@{/admin/user_list}" th:object="${user}" method="post">
-            <div>
+        <form th:action="@{/admin/user_list}" th:object="${user}" method="post" class="fire-dept-form">
+            <div class="fire-dept-form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" th:field="*{username}" />
+                <input type="text" id="username" th:field="*{username}" class="fire-dept-input"/>
             </div>
-			<div>
-			    <label for="firstName">First Name:</label>
-			    <input type="text" id="firstName" th:field="*{firstName}" />
-			</div>
-			<div>
-			    <label for="lastName">Last Name:</label>
-			    <input type="text" id="lastName" th:field="*{lastName}" />
-			</div>
-            <div>
+            <div class="fire-dept-form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" th:field="*{firstName}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" th:field="*{lastName}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" th:field="*{password}" />
+                <input type="password" id="password" th:field="*{password}" class="fire-dept-input"/>
             </div>
-            <div>
-                <button type="submit">Create</button>
+            <div class="fire-dept-form-group">
+                <button type="submit" class="fire-dept-btn">Create</button>
             </div>
         </form>
-		<button onclick="history.back()">Go Back</button>
+        <button onclick="history.back()" class="fire-dept-btn fire-dept-btn-secondary">Go Back</button>
     </div>
 </body>
 </html>
