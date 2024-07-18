@@ -33,6 +33,7 @@ import com.example.demo.repository.EquipmentRepository;
 import com.example.demo.repository.MaintenanceScheduleRepository;
 import com.example.demo.repository.NewsletterRepository;
 import com.example.demo.repository.NewsletterSubscriberRepository;
+import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserActivityRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AnnouncementService;
@@ -47,6 +48,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	@Autowired
 	private AnnouncementRepository announcementRepository;
@@ -100,11 +104,13 @@ public class AdminController {
     @GetMapping("/user_list/new")
     public String showCreateUserForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("allRoles", roleRepository.findAll());
         return "admin/create_user";
     }
 
     @PostMapping("/user_list")
     public String createUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/admin/user_list";
     }
