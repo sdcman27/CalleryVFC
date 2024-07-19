@@ -24,11 +24,7 @@
 	                    previewWindow.document.close();
 	                }
 	                reader.readAsDataURL(file);
-	            } else if (imageUrl) {
-	                previewWindow.document.write('<img src="' + imageUrl + '" alt="Announcement Image" style="max-width: 100%;">');
-	                previewWindow.document.write('</body></html>');
-	                previewWindow.document.close();
-	            } else {
+	            }  else {
 	                previewWindow.document.write('</body></html>');
 	                previewWindow.document.close();
 	            }
@@ -46,10 +42,6 @@
             <div class="fire-dept-form-group">
                 <label for="content">Content:</label>
                 <textarea id="content" th:field="*{content}" class="fire-dept-input" required></textarea>
-            </div>
-            <div class="fire-dept-form-group">
-                <label for="imageUrl">Image URL:</label>
-                <input type="text" id="imageUrl" th:field="*{imageUrl}" class="fire-dept-input"/>
             </div>
             <div class="fire-dept-form-group">
                 <label for="imageFile">Upload Image:</label>
