@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.config.PasswordEncoderConfig;
 import com.example.demo.model.Announcement;
@@ -45,6 +49,8 @@ import com.example.demo.service.SystemUsageService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	private static final String UPLOAD_DIR = "uploads/";
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -159,7 +165,22 @@ public class AdminController {
     }
 
     @PostMapping("/av-announcements")
-    public String createAnnouncement(@ModelAttribute Announcement announcement) {
+    public String createAnnouncement(@ModelAttribute Announcement announcement, @RequestParam("imageFile") MultipartFile imageFile) {
+        if (!imageFile.isEmpty()) {
+            try {
+                Path uploadDir = Paths.get(UPLOAD_DIR);
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+
+                byte[] bytes = imageFile.getBytes();
+                Path path = uploadDir.resolve(imageFile.getOriginalFilename());
+                Files.write(path, bytes);
+                announcement.setImageUrl("/" + UPLOAD_DIR + imageFile.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
         announcement.setUser(user);
@@ -175,7 +196,22 @@ public class AdminController {
     }
 
     @PostMapping("/av-announcements/update/{id}")
-    public String updateAnnouncement(@PathVariable("id") Long id, @ModelAttribute Announcement announcement) {
+    public String updateAnnouncement(@PathVariable("id") Long id, @ModelAttribute Announcement announcement, @RequestParam("imageFile") MultipartFile imageFile) {
+        if (!imageFile.isEmpty()) {
+            try {
+                Path uploadDir = Paths.get(UPLOAD_DIR);
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+
+                byte[] bytes = imageFile.getBytes();
+                Path path = uploadDir.resolve(imageFile.getOriginalFilename());
+                Files.write(path, bytes);
+                announcement.setImageUrl("/" + UPLOAD_DIR + imageFile.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         announcementRepository.save(announcement);
         return "redirect:/admin/av-announcements";
     }
