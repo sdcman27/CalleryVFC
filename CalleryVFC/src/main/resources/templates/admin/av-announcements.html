@@ -2,13 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Manage Announcements</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Manage Announcements</h1>
-		<a href="/admin">Return to Admin Dashboard</a>
-        <a href="/admin/av-announcements/new">Create New Announcement</a>
-        <table>
+		<nav class="primary-navigation fire-dept-nav">
+		    <ul class="fire-dept-nav-links">
+		        <li><a href="/admin">Return to Admin Dashboard</a></li>
+		        <li><a href="/admin/user_list/new">Create New User</a></li>
+		    </ul>
+		</nav>
+		
+		<div class="fire-dept-user-list">
+        <table class="fire-dept-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -30,6 +37,7 @@
                 </tr>
             </tbody>
         </table>
+	  </div>
     </div>
 </body>
 </html>
