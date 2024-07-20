@@ -173,10 +173,10 @@ public class AdminController {
                     Files.createDirectories(uploadDir);
                 }
 
-                byte[] bytes = imageFile.getBytes();
-                Path path = uploadDir.resolve(imageFile.getOriginalFilename());
-                Files.write(path, bytes);
-                announcement.setImageUrl("/" + UPLOAD_DIR + imageFile.getOriginalFilename());
+                String fileName = imageFile.getOriginalFilename();
+                Path path = uploadDir.resolve(fileName);
+                Files.write(path, imageFile.getBytes());
+                announcement.setImageUrl("/uploads/" + fileName);  // Ensure this path is correct
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -204,10 +204,10 @@ public class AdminController {
                     Files.createDirectories(uploadDir);
                 }
 
-                byte[] bytes = imageFile.getBytes();
-                Path path = uploadDir.resolve(imageFile.getOriginalFilename());
-                Files.write(path, bytes);
-                announcement.setImageUrl("/" + UPLOAD_DIR + imageFile.getOriginalFilename());
+                String fileName = imageFile.getOriginalFilename();
+                Path path = uploadDir.resolve(fileName);
+                Files.write(path, imageFile.getBytes());
+                announcement.setImageUrl("/uploads/" + fileName);  // Ensure this path is correct
             } catch (IOException e) {
                 e.printStackTrace();
             }
