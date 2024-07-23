@@ -23,7 +23,7 @@
                 <p th:text="${announcement.content}">Announcement Content</p>
                 <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
                 <div th:if="${announcement.imageUrl}">
-                    <img th:src="${announcement.imageUrl}" alt="Announcement Image"/>
+					<img th:src="@{${announcement.imageUrl}}" alt="Announcement Image" style="max-width: 100%;">
                 </div>
             </div>
         </div>
