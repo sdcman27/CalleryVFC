@@ -49,7 +49,6 @@ import com.example.demo.service.SystemUsageService;
 @RequestMapping("/admin")
 public class AdminController {
 	
-	private static final String UPLOAD_DIR = "uploads/";
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -167,7 +166,7 @@ public class AdminController {
     public String createAnnouncement(@ModelAttribute Announcement announcement, @RequestParam("imageFile") MultipartFile imageFile) {
         if (!imageFile.isEmpty()) {
             try {
-                Path uploadDir = Paths.get(UPLOAD_DIR);
+                Path uploadDir = Paths.get("src/main/resources/static/uploads");
                 if (!Files.exists(uploadDir)) {
                     Files.createDirectories(uploadDir);
                 }
@@ -198,7 +197,7 @@ public class AdminController {
     public String updateAnnouncement(@PathVariable("id") Long id, @ModelAttribute Announcement announcement, @RequestParam("imageFile") MultipartFile imageFile) {
         if (!imageFile.isEmpty()) {
             try {
-                Path uploadDir = Paths.get(UPLOAD_DIR);
+                Path uploadDir = Paths.get("src/main/resources/static/uploads");
                 if (!Files.exists(uploadDir)) {
                     Files.createDirectories(uploadDir);
                 }
