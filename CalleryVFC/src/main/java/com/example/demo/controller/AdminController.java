@@ -301,20 +301,31 @@ public class AdminController {
 
         if ("now".equals(schedule)) {
             newsletter.setSendDateTime(LocalDateTime.now());
+            newsletterRepository.save(newsletter);
             for (String recipient : recipients) {
-                emailService.sendTestEmail(recipient, subject, content);
+                try {
+                    emailService.sendTestEmail(recipient, subject, content);
+                } catch (Exception e) {
+                    model.addAttribute("message", "Email sending failed, but newsletter saved to the repository.");
+                    return "admin/av-send_test_email";
+                }
             }
             model.addAttribute("message", "Test email sent successfully and saved to the newsletter repository!");
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            LocalDateTime scheduledDateTime = LocalDateTime.parse(sendDateTime, formatter);
-            newsletter.setSendDateTime(scheduledDateTime);
-            newsletterRepository.save(newsletter);
-            model.addAttribute("message", "Test email scheduled successfully and saved to the newsletter repository!");
-        }
+        	 try {
+                 DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                 LocalDateTime scheduledDateTime = LocalDateTime.parse(sendDateTime, formatter);
+                 newsletter.setSendDateTime(scheduledDateTime);
+                 newsletterRepository.save(newsletter);
+                 model.addAttribute("message", "Test email scheduled successfully and saved to the newsletter repository!");
+             } catch (Exception e) {
+                 model.addAttribute("message", "Scheduling failed, but newsletter saved to the repository.");
+                 return "admin/av-send_test_email";
+             }
+         }
 
-        return "admin/av-send_test_email";
-    }
+         return "admin/av-send_test_email";
+     }
     
     
     @GetMapping("/av-user_activity")
