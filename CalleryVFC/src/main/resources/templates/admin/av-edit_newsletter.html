@@ -2,28 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Edit Newsletter</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Edit Newsletter</h1>
-        <form th:action="@{/admin/av-newsletters/update/{id}(id=${newsletter.id})}" th:object="${newsletter}" method="post">
-            <div>
+        <form th:action="@{/admin/av-newsletters/update/{id}(id=${newsletter.id})}" th:object="${newsletter}" method="post" class="fire-dept-form">
+            <div class="fire-dept-form-group">
                 <label for="subject">Subject:</label>
-                <input type="text" id="subject" th:field="*{subject}" />
+                <input type="text" id="subject" th:field="*{subject}" class="fire-dept-input" />
             </div>
-            <div>
+            <div class="fire-dept-form-group">
                 <label for="content">Content:</label>
-                <textarea id="content" th:field="*{content}"></textarea>
+                <textarea id="content" th:field="*{content}" class="fire-dept-input"></textarea>
             </div>
-            <div>
+            <div class="fire-dept-form-group">
                 <label for="sendDateTime">Send Date:</label>
-                <input type="datetime-local" id="sendDateTime" th:field="*{sendDateTime}" />
+                <input type="datetime-local" id="sendDateTime" th:field="*{sendDateTime}" class="fire-dept-input" />
             </div>
-            <div>
-                <button type="submit">Update</button>
+            <div class="fire-dept-form-group">
+                <button type="submit" class="fire-dept-btn">Update</button>
             </div>
         </form>
-		<button onclick="history.back()">Go Back</button>
+		<button onclick="window.location.href='/admin/av-newsletters'" class="fire-dept-btn fire-dept-btn-secondary">Go Back</button>
     </div>
 </body>
 </html>
