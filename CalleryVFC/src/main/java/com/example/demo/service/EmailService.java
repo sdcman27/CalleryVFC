@@ -27,8 +27,6 @@ public class EmailService {
         message.setSubject(newsletter.getSubject());
         message.setText(newsletter.getContent());
         mailSender.send(message);
-        newsletter.setSent(true);
-        newsletterRepository.save(newsletter);
     	} catch (Exception e) {
         e.printStackTrace();
     }
