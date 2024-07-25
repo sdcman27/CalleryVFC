@@ -35,7 +35,7 @@ public class NewsletterScheduler {
         List<Newsletter> newsletters = newsletterRepository.findAll();
         for (Newsletter newsletter : newsletters) {
             logger.info("Checking newsletter with ID: " + newsletter.getId() + " scheduled for: " + newsletter.getSendDateTime());
-            if (newsletter.getSendDateTime().isBefore(LocalDateTime.now())) {
+            if (newsletter.getSendDateTime().isBefore(LocalDateTime.now()) && !newsletter.isSent()) {
                 logger.info("Sending newsletter with ID: " + newsletter.getId());
                 List<String> subscribers = getSubscribers();
                 for (String email : subscribers) {
