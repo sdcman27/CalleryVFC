@@ -253,9 +253,24 @@ public class AdminController {
 
     @PostMapping("/av-newsletters/update/{id}")
     public String updateNewsletter(@PathVariable("id") Long id, @ModelAttribute Newsletter newsletter) {
-        newsletterRepository.save(newsletter);
+        Newsletter existingNewsletter = newsletterRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid newsletter Id:" + id));
+
+        if (newsletter.getSubject() != null && !newsletter.getSubject().isEmpty()) {
+            existingNewsletter.setSubject(newsletter.getSubject());
+        }
+
+        if (newsletter.getContent() != null && !newsletter.getContent().isEmpty()) {
+            existingNewsletter.setContent(newsletter.getContent());
+        }
+
+        if (newsletter.getSendDateTime() != null) {
+            existingNewsletter.setSendDateTime(newsletter.getSendDateTime());
+        }
+
+        newsletterRepository.save(existingNewsletter);
         return "redirect:/admin/av-newsletters";
     }
+
 
     @GetMapping("/av-newsletters/delete/{id}")
     public String deleteNewsletter(@PathVariable("id") Long id) {
