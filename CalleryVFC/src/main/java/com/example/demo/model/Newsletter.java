@@ -14,6 +14,7 @@ public class Newsletter {
     private String subject;
     private String content;
     private LocalDateTime sendDateTime; // To schedule the sending of the newsletter
+    private boolean sent = false;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -59,4 +60,14 @@ public class Newsletter {
     public void setUser(User user) {
         this.user = user;
     }
+
+	public boolean isSent() {
+		return sent;
+	}
+
+	public void setSent(boolean sent) {
+		this.sent = sent;
+	}
+    
+    
 }
