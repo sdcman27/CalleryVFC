@@ -365,13 +365,18 @@ public class AdminController {
 
     @PostMapping("/av-settings")
     public String updateSettings(@RequestParam("key") String key,
-                                 @RequestParam("value") String value,
+                                 @RequestParam(value = "value", required = false, defaultValue = "false") String value,
                                  Model model) {
+        // Ensure the value is stored as a boolean string for the toggle settings
+        if ("maintenance_mode".equals(key) || "enable_notifications".equals(key)) {
+            value = "true".equals(value) ? "true" : "false";
+        }
         systemSettingService.updateSetting(key, value);
         model.addAttribute("settings", systemSettingService.getAllSettings());
         model.addAttribute("message", "Setting updated successfully");
         return "admin/av-settings";
     }
+
 
     @GetMapping("/av-backup")
     public String backup() {
@@ -382,7 +387,7 @@ public class AdminController {
     public String performBackup(Model model) {
         try {
             backupService.backupDatabase();
-            model.addAttribute("message", "Backup created successfully, please check your downloads folder!");
+            model.addAttribute("message", "Backup created successfully.");
         } catch (IOException e) {
             model.addAttribute("error", "Error creating backup: " + e.getMessage());
         }
@@ -393,13 +398,13 @@ public class AdminController {
     public String performRestore(Model model) {
         try {
             backupService.restoreDatabase();
-            model.addAttribute("message", "Database restored successfully!");
+            model.addAttribute("message", "Database restored successfully.");
         } catch (IOException e) {
             model.addAttribute("error", "Error restoring database: " + e.getMessage());
         }
         return "admin/av-backup";
     }
-
+    
     @GetMapping("/av-equipment")
     public String listEquipment(Model model) {
         List<Equipment> equipmentList = equipmentRepository.findAll();
@@ -428,7 +433,14 @@ public class AdminController {
 
     @PostMapping("/av-equipment/update/{id}")
     public String updateEquipment(@PathVariable("id") Long id, @ModelAttribute Equipment equipment) {
-        equipmentRepository.save(equipment);
+        Equipment existingEquipment = equipmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid equipment Id:" + id));
+        
+        existingEquipment.setName(equipment.getName() != null ? equipment.getName() : existingEquipment.getName());
+        existingEquipment.setType(equipment.getType() != null ? equipment.getType() : existingEquipment.getType());
+        existingEquipment.setStatus(equipment.getStatus() != null ? equipment.getStatus() : existingEquipment.getStatus());
+        existingEquipment.setLocation(equipment.getLocation() != null ? equipment.getLocation() : existingEquipment.getLocation());
+        
+        equipmentRepository.save(existingEquipment);
         return "redirect:/admin/av-equipment";
     }
 
