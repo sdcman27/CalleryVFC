@@ -2,32 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Create Equipment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Add New Equipment</h1>
-        <form th:action="@{/admin/av-equipment}" method="post">
-            <div>
+        <form th:action="@{/admin/av-equipment}" method="post" class="fire-dept-form">
+            <div class="fire-dept-form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name"/>
+                <input type="text" id="name" name="name" class="fire-dept-input"/>
             </div>
-            <div>
+            <div class="fire-dept-form-group">
                 <label for="type">Type:</label>
-                <input type="text" id="type" name="type"/>
+                <input type="text" id="type" name="type" class="fire-dept-input"/>
             </div>
-            <div>
+            <div class="fire-dept-form-group">
                 <label for="status">Status:</label>
-                <input type="text" id="status" name="status"/>
+                <input type="text" id="status" name="status" class="fire-dept-input"/>
             </div>
-            <div>
+            <div class="fire-dept-form-group">
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location"/>
+                <input type="text" id="location" name="location" class="fire-dept-input"/>
             </div>
-            <div>
-                <button type="submit">Add Equipment</button>
+            <div class="fire-dept-form-group">
+                <button type="submit" class="fire-dept-btn">Add Equipment</button>
             </div>
         </form>
-        <a href="/admin/av-equipment">Back to Equipment List</a>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin/av-equipment">Back to Equipment List</a></li>
+            </ul>
+        </nav>
     </div>
 </body>
 </html>
