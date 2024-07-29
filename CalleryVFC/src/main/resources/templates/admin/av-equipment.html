@@ -2,13 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Equipment Management</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Equipment Management</h1>
-		<a href="/admin">Return to Admin Dashboard</a>
-        <a href="/admin/av-equipment/new">Add New Equipment</a>
-        <table>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin">Return to Admin Dashboard</a></li>
+                <li><a href="/admin/av-equipment/new">Add New Equipment</a></li>
+            </ul>
+        </nav>
+        <table class="fire-dept-table">
             <thead>
                 <tr>
                     <th>ID</th>
