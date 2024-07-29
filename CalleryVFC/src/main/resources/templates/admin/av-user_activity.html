@@ -2,32 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Activity Logs</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>User Activity Logs</h1>
-		<a href="/admin">Return to Admin Dashboard</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Action</th>
-                    <th>Timestamp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="activity : ${activities}">
-                    <td th:text="${activity.id}"></td>
-                    <td th:text="${activity.username}"></td>
-                    <td th:text="${activity.action}"></td>
-                    <td th:text="${activity.timestamp}"></td>
-                </tr>
-                <tr th:if="${#lists.isEmpty(activities)}">
-                    <td colspan="4">No activities recorded.</td>
-                </tr>
-            </tbody>
-        </table>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin">Return to Admin Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="fire-dept-user-list">
+            <table class="fire-dept-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="activity : ${activities}">
+                        <td th:text="${activity.id}"></td>
+                        <td th:text="${activity.username}"></td>
+                        <td th:text="${activity.action}"></td>
+                        <td th:text="${activity.timestamp}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(activities)}">
+                        <td colspan="4">No activities recorded.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
