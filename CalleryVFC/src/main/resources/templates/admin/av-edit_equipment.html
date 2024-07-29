@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Equipment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="fire-dept-container">
+        <h1>Edit Equipment</h1>
+        <form th:action="@{/admin/av-equipment/update/{id}(id=${equipment.id})}" method="post" class="fire-dept-form">
+            <div class="fire-dept-form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" th:value="${equipment.name}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="type" th:value="${equipment.type}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" th:value="${equipment.status}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" th:value="${equipment.location}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <button type="submit" class="fire-dept-btn">Update Equipment</button>
+            </div>
+        </form>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin/av-equipment">Back to Equipment List</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
