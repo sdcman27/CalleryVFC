@@ -2,22 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Backup and Restore</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
+    <div class="fire-dept-container">
         <h1>Backup and Restore</h1>
-		<a href="/admin">Return to Admin Dashboard</a>
-
-        <form th:action="@{/admin/av-backup}" method="post">
-            <button type="submit">Create Backup</button>
-        </form>
-        <form th:action="@{/admin/av-restore}" method="post">
-            <button type="submit">Restore Backup</button>
-        </form>
-        <div th:if="${message}">
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin">Return to Admin Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="fire-dept-form">
+            <form th:action="@{/admin/av-backup}" method="post" class="fire-dept-form-group">
+                <label for="backupFileName">Backup File Name:</label>
+                <input type="text" id="backupFileName" name="backupFileName" class="fire-dept-input" placeholder="backup.sql" required>
+                <button type="submit" class="fire-dept-btn">Create Backup</button>
+            </form>
+            <form th:action="@{/admin/av-restore}" method="post" enctype="multipart/form-data" class="fire-dept-form-group">
+                <label for="file">Restore Backup File (.sql):</label>
+                <input type="file" id="file" name="file" class="fire-dept-input" accept=".sql" required>
+                <button type="submit" class="fire-dept-btn fire-dept-btn-secondary">Restore Backup</button>
+            </form>
+        </div>
+        <div th:if="${message}" class="fire-dept-form-group">
             <p th:text="${message}"></p>
         </div>
-        <div th:if="${error}">
+        <div th:if="${error}" class="fire-dept-form-group">
             <p th:text="${error}"></p>
         </div>
     </div>
