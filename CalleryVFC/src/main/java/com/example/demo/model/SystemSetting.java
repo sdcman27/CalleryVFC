@@ -12,7 +12,6 @@ public class SystemSetting {
     private String settingValue;
 
     public SystemSetting() {
-        // Default constructor required by JPA
     }
 
     public SystemSetting(String key, String value) {
@@ -20,7 +19,6 @@ public class SystemSetting {
         this.settingValue = value;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -34,13 +34,14 @@ public class BackupService {
     }
 
     private void executeCommand(String command) throws IOException {
+        System.out.println("Executing command: " + command);  // Debug statement
         ProcessBuilder processBuilder = new ProcessBuilder("bash", "-c", command);
         processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                System.out.println(line);  // Debug statement
             }
         }
     }
