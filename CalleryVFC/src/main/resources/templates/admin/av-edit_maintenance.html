@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Maintenance Schedule</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="fire-dept-container">
+        <h1>Edit Maintenance Schedule</h1>
+        <form th:action="@{/admin/av-maintenance/update/{id}(id=${maintenance.id})}" method="post" class="fire-dept-form">
+            <div class="fire-dept-form-group">
+                <label for="equipmentName">Equipment Name:</label>
+                <input type="text" id="equipmentName" name="equipmentName" th:value="${maintenance.equipmentName}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="maintenanceDate">Maintenance Date:</label>
+                <input type="date" id="maintenanceDate" name="maintenanceDate" th:value="${maintenance.maintenanceDate}" class="fire-dept-input"/>
+            </div>
+            <div class="fire-dept-form-group">
+                <label for="details">Details:</label>
+                <textarea id="details" name="details" class="fire-dept-input" th:text="${maintenance.details}"></textarea>
+            </div>
+            <div class="fire-dept-form-group">
+                <button type="submit" class="fire-dept-btn">Update Schedule</button>
+            </div>
+        </form>
+        <nav class="primary-navigation fire-dept-nav">
+            <ul class="fire-dept-nav-links">
+                <li><a href="/admin/av-maintenance">Back to Maintenance List</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
