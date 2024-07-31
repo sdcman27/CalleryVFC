@@ -473,13 +473,19 @@ public class AdminController {
     @GetMapping("/av-maintenance/edit/{id}")
     public String showEditMaintenanceForm(@PathVariable("id") Long id, Model model) {
         MaintenanceSchedule maintenanceSchedule = maintenanceScheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid maintenance Id:" + id));
-        model.addAttribute("maintenanceSchedule", maintenanceSchedule);
+        model.addAttribute("maintenance", maintenanceSchedule);
         return "admin/av-edit_maintenance";
     }
 
     @PostMapping("/av-maintenance/update/{id}")
-    public String updateMaintenance(@PathVariable("id") Long id, @ModelAttribute MaintenanceSchedule maintenanceSchedule) {
-        maintenanceScheduleRepository.save(maintenanceSchedule);
+    public String updateMaintenance(@PathVariable("id") Long id, @ModelAttribute MaintenanceSchedule maintenance) {
+        MaintenanceSchedule existingMaintenance = maintenanceScheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid maintenance Id:" + id));
+
+        existingMaintenance.setEquipmentName(maintenance.getEquipmentName() != null ? maintenance.getEquipmentName() : existingMaintenance.getEquipmentName());
+        existingMaintenance.setMaintenanceDate(maintenance.getMaintenanceDate() != null ? maintenance.getMaintenanceDate() : existingMaintenance.getMaintenanceDate());
+        existingMaintenance.setDetails(maintenance.getDetails() != null ? maintenance.getDetails() : existingMaintenance.getDetails());
+
+        maintenanceScheduleRepository.save(existingMaintenance);
         return "redirect:/admin/av-maintenance";
     }
 
