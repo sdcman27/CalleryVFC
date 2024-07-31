@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Moderator Homepage</title>
-	   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	   <meta name="_csrf" th:content="${_csrf.token}" />
-	   <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-	   <script>
-	       function handleLogout(event) {
-	           event.preventDefault();
-	           const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-	           const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+    <title>Moderator Homepage</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <script>
+        function handleLogout(event) {
+            event.preventDefault();
+            const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-	           fetch('/logout', {
-	               method: 'POST',
-	               headers: {
-	                   'Content-Type': 'application/x-www-form-urlencoded',
-	                   [csrfHeader]: csrfToken
-	               },
-	           }).then(response => {
-	               if (response.ok) {
-	                   window.location.href = '/home';
-	               }
-	           });
-	       }
-	   </script>
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    [csrfHeader]: csrfToken
+                },
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '/home';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
-	<div class="container">
-	     <h1>Moderator Homepage</h1>
-		<ul>
-		   <li><a href="/moderator/inquiries">Manage Rental Inquiries</a></li>
-		   <li><a href="/moderator/announcements">Manage Announcements</a></li>
-		   <li><a href="/moderator/applications">View Fireman Applications</a></li>
-
-		</ul>
-	     <a href="#" class="btn btn-primary" onclick="handleLogout(event)">Logout</a>
-	 </div>
+    <div class="admin-container">
+        <h1>Moderator Homepage</h1>
+        <nav class="primary-navigation admin-nav">
+            <ul class="admin-nav-links">
+                <li><a href="/moderator/inquiries">Manage Rental Inquiries</a></li>
+                <li><a href="/moderator/announcements">Manage Announcements</a></li>
+                <li><a href="/moderator/applications">View Fireman Applications</a></li>
+                <li>
+                    <a href="#" class="admin-btn admin-logout-btn" onclick="handleLogout(event)">Logout</a>
+                </li>
+            </ul>
+        </nav>
+		
+		<div class="admin-announcements">
+		    <h2>Announcements</h2>
+		    <div th:each="announcement : ${announcements}" class="admin-announcement-item">
+		        <h3 th:text="${announcement.title}">Announcement Title</h3>
+		        <p th:text="${announcement.content}">Announcement Content</p>
+		        <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
+		        <div th:if="${announcement.imageUrl}"><img th:src="@{${announcement.imageUrl}}" alt="Announcement Image" style="max-width: 100%;">
+		        </div>
+		    </div>
+		</div>
+		
+    </div>
 </body>
 </html>
