@@ -77,7 +77,6 @@ body {
 }
 
 .fire-dept-logout-btn {
-    background-color: #dc3545;
     margin-left: auto;
     cursor: pointer;
 }
@@ -192,7 +191,6 @@ For Admin
 }
 
 .admin-logout-btn {
-    background-color: #dc3545;
     margin-left: auto;
     cursor: pointer;
 }
