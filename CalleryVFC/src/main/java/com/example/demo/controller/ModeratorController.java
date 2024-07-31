@@ -34,7 +34,8 @@ public class ModeratorController {
     private FiremanApplicationService firemanApplicationService;
 	
     @GetMapping
-    public String moderatorHome() {
+    public String moderatorHome(Model model) {
+    	model.addAttribute("announcements", announcementService.getAllAnnouncements());
         return "moderator/moderator";
     }
 
