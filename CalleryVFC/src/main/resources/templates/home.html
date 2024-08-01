@@ -5,10 +5,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>Welcome to the Fire Department Website</h1>
-        <nav class="primary-navigation fire-dept-nav">
-            <ul class="fire-dept-nav-links">
+        <nav class="primary-navigation nav">
+            <ul class="nav-links">
                 <li><a href="/calendar">Rentals</a></li>
                 <li><a href="/subscribe">Newsletter</a></li>
                 <li><a href="/apply">Careers</a></li>
@@ -16,7 +16,7 @@
             </ul>
         </nav>
 
-        <div class="fire-dept-announcements">
+        <div class="announcements">
             <h2>Announcements</h2>
             <div th:each="announcement : ${announcements}" class="fire-dept-announcement-item">
                 <h3 th:text="${announcement.title}">Announcement Title</h3>
