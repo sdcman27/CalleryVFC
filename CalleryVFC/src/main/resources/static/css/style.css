@@ -10,7 +10,7 @@ body {
     padding: 0;
 }
 
-.fire-dept-container {
+.container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -18,7 +18,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.fire-dept-container h1, .fire-dept-container h2 {
+.container h1, .container h2 {
     text-align: center;
 }
 
@@ -52,31 +52,31 @@ body {
     border-bottom: 2px solid #3ca0e7;
 }
 
-.fire-dept-announcements {
+.announcements {
     margin-top: 20px;
 }
 
-.fire-dept-announcement-item {
+.announcement-item {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
 }
 
-.fire-dept-announcement-item h3 {
+.announcement-item h3 {
     margin: 0;
 }
 
-.fire-dept-announcement-item p {
+.announcement-item p {
     margin: 5px 0;
 }
 
-.fire-dept-announcement-item img {
+.announcement-item img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 10px 0;
 }
 
-.fire-dept-logout-btn {
+.logout-btn {
     margin-left: auto;
     cursor: pointer;
 }
@@ -84,17 +84,8 @@ body {
 /*
 For Admin
 */
-.admin-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
-.admin-container h1, .admin-container h2 {
-    text-align: center;
-}
+
 
 .primary-navigation {
     margin: 0 auto;
@@ -166,44 +157,6 @@ For Admin
     transition: all 0.3s ease;
 }
 
-.admin-announcements {
-    margin-top: 20px;
-}
-
-.admin-announcement-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.admin-announcement-item h3 {
-    margin: 0;
-}
-
-.admin-announcement-item p {
-    margin: 5px 0;
-}
-
-.admin-announcement-item img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 10px 0;
-}
-
-.admin-logout-btn {
-    margin-left: auto;
-    cursor: pointer;
-}
-
-.container {
-    width: 100%;
-    max-width: auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
 .login-form, .home {
     text-align: center;
 }
@@ -243,7 +196,7 @@ For Admin
 }
 
 /* Reusable Form Styles */
-.fire-dept-form {
+.form {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -252,17 +205,17 @@ For Admin
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.fire-dept-form-group {
+.form-group {
     margin-bottom: 15px;
 }
 
-.fire-dept-form-group label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.fire-dept-input {
+.input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
@@ -270,55 +223,54 @@ For Admin
     font-size: 14px;
 }
 
-.fire-dept-btn {
+.btn {
     width: 100%;
     padding: 10px;
     border: none;
-    background-color: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
 
-.fire-dept-btn:hover {
+.btn:hover {
     background-color: #0056b3;
 }
 
-.fire-dept-btn-secondary {
+.btn-secondary {
     background-color: #6c757d;
 }
 
-.fire-dept-btn-secondary:hover {
+.btn-secondary:hover {
     background-color: #5a6268;
 }
 
 /* Table Styles */
-.fire-dept-table {
+.table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.fire-dept-table th, .fire-dept-table td {
+.table th, .table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.fire-dept-table th {
+.table th {
     background-color: #f2f2f2;
 }
 
-.fire-dept-table tr:hover {
+.table tr:hover {
     background-color: #f1f1f1;
 }
 
-.fire-dept-table a {
+.table a {
     color: #007bff;
     text-decoration: none;
 }
 
-.fire-dept-table a:hover {
+.table a:hover {
     text-decoration: underline;
 }
