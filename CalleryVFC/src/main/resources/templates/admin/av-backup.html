@@ -5,29 +5,29 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>Backup and Restore</h1>
-        <nav class="primary-navigation fire-dept-nav">
-            <ul class="fire-dept-nav-links">
+        <nav class="primary-navigation nav">
+            <ul class="nav-links">
                 <li><a href="/admin">Return to Admin Dashboard</a></li>
             </ul>
         </nav>
-        <div class="fire-dept-form">
-            <form th:action="@{/admin/av-backup}" method="post" class="fire-dept-form-group">
+        <div class="form">
+            <form th:action="@{/admin/av-backup}" method="post" class="form-group">
                 <label for="backupFileName">Backup File Name:</label>
-                <input type="text" id="backupFileName" name="backupFileName" class="fire-dept-input" placeholder="backup.sql" required>
-                <button type="submit" class="fire-dept-btn">Create Backup</button>
+                <input type="text" id="backupFileName" name="backupFileName" class="input" placeholder="backup.sql" required>
+                <button type="submit" class="btn">Create Backup</button>
             </form>
-            <form th:action="@{/admin/av-restore}" method="post" enctype="multipart/form-data" class="fire-dept-form-group">
+            <form th:action="@{/admin/av-restore}" method="post" enctype="multipart/form-data" class="form-group">
                 <label for="file">Restore Backup File (.sql):</label>
-                <input type="file" id="file" name="file" class="fire-dept-input" accept=".sql" required>
-                <button type="submit" class="fire-dept-btn fire-dept-btn-secondary">Restore Backup</button>
+                <input type="file" id="file" name="file" class="input" accept=".sql" required>
+                <button type="submit" class="btn btn-secondary">Restore Backup</button>
             </form>
         </div>
-        <div th:if="${message}" class="fire-dept-form-group">
+        <div th:if="${message}" class="form-group">
             <p th:text="${message}"></p>
         </div>
-        <div th:if="${error}" class="fire-dept-form-group">
+        <div th:if="${error}" class="form-group">
             <p th:text="${error}"></p>
         </div>
     </div>
