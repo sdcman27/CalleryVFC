@@ -5,45 +5,45 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>Send Test Email</h1>
-        <form th:action="@{/admin/av-send_test_email}" method="post" class="fire-dept-form" onsubmit="return validateForm()">
-            <div class="fire-dept-form-group">
+        <form th:action="@{/admin/av-send_test_email}" method="post" class="form" onsubmit="return validateForm()">
+            <div class="form-group">
                 <label for="to">To:</label>
-                <input type="email" id="to" name="to" class="fire-dept-input"/>
+                <input type="email" id="to" name="to" class="input"/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject" value="Test Email" class="fire-dept-input"/>
+                <input type="text" id="subject" name="subject" value="Test Email" class="input"/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="content">Content:</label>
-                <textarea id="content" name="content" class="fire-dept-input">This is a test email.</textarea>
+                <textarea id="content" name="content" class="input">This is a test email.</textarea>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="schedule">Schedule Email:</label>
                 <div>
                     <input type="radio" id="send_now" name="schedule" value="now" checked onclick="toggleSchedule(false)"> Send Now
                     <input type="radio" id="send_later" name="schedule" value="later" onclick="toggleSchedule(true)"> Send Later
                 </div>
             </div>
-            <div class="fire-dept-form-group" id="schedule_options" style="display: none;">
+            <div class="form-group" id="schedule_options" style="display: none;">
                 <label for="sendDateTime">Send Date and Time:</label>
-                <input type="datetime-local" id="sendDateTime" name="sendDateTime" class="fire-dept-input"/>
+                <input type="datetime-local" id="sendDateTime" name="sendDateTime" class="input"/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <input type="checkbox" id="includeSubscribers" name="includeSubscribers" onclick="toggleToField()">
                 <label for="includeSubscribers">Include Subscribers</label>
             </div>
-            <div class="fire-dept-form-group">
-                <button type="submit" class="fire-dept-btn">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn">Submit</button>
             </div>
         </form>
         <div th:if="${message}">
             <p th:text="${message}"></p>
         </div>
         <div>
-            <button onclick="window.location.href='/admin/av-newsletters'" class="fire-dept-btn fire-dept-btn-secondary">Go Back</button>
+            <button onclick="window.location.href='/admin/av-newsletters'" class="btn btn-secondary">Go Back</button>
         </div>
     </div>
     <script>

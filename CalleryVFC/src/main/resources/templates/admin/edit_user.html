@@ -5,30 +5,30 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>Edit User</h1>
-        <form th:action="@{/admin/user_list/update/{id}(id=${user.id})}" th:object="${user}" method="post" class="fire-dept-form">
-            <div class="fire-dept-form-group">
+        <form th:action="@{/admin/user_list/update/{id}(id=${user.id})}" th:object="${user}" method="post" class="form">
+            <div class="form-group">
                 <label for="username">* Username:</label>
-                <input type="text" id="username" th:field="*{username}" class="fire-dept-input" required/>
+                <input type="text" id="username" th:field="*{username}" class="input" required/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="firstName">* First Name:</label>
-                <input type="text" id="firstName" th:field="*{firstName}" class="fire-dept-input" required/>
+                <input type="text" id="firstName" th:field="*{firstName}" class="input" required/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="lastName">* Last Name:</label>
-                <input type="text" id="lastName" th:field="*{lastName}" class="fire-dept-input" required/>
+                <input type="text" id="lastName" th:field="*{lastName}" class="input" required/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="password">(Not required) Password:</label>
-                <input type="password" id="password" th:field="*{password}" class="fire-dept-input"/>
+                <input type="password" id="password" th:field="*{password}" class="input"/>
             </div>
-            <div class="fire-dept-form-group">
-                <button type="submit" class="fire-dept-btn">Update</button>
+            <div class="form-group">
+                <button type="submit" class="btn">Update</button>
             </div>
         </form>
-        <button onclick="history.back()" class="fire-dept-btn fire-dept-btn-secondary">Go Back</button>
+        <button onclick="history.back()" class="btn btn-secondary">Go Back</button>
     </div>
 </body>
 </html>

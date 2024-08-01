@@ -51,15 +51,15 @@
     </style>
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>System Settings</h1>
-        <nav class="primary-navigation fire-dept-nav">
-            <ul class="fire-dept-nav-links">
+        <nav class="primary-navigation nav">
+            <ul class="nav-links">
                 <li><a href="/admin">Return to Admin Dashboard</a></li>
             </ul>
         </nav>
-        <div th:each="setting : ${settings}" class="fire-dept-form-group">
-            <form th:action="@{/admin/av-settings}" method="post" class="fire-dept-form">
+        <div th:each="setting : ${settings}" class="form-group">
+            <form th:action="@{/admin/av-settings}" method="post" class="form">
                 <label th:for="${setting.settingKey}" th:text="${setting.settingKey}"></label>
                 <div th:switch="${setting.settingKey}">
                     <input type="hidden" th:name="key" th:value="${setting.settingKey}"/>
@@ -78,10 +78,10 @@
                         </label>
                     </div>
                     <div th:case="*">
-                        <input type="text" th:id="${setting.settingKey}" th:name="value" th:value="${setting.settingValue}" class="fire-dept-input"/>
+                        <input type="text" th:id="${setting.settingKey}" th:name="value" th:value="${setting.settingValue}" class="input"/>
                     </div>
                 </div>
-                <button type="submit" class="fire-dept-btn">Update</button>
+                <button type="submit" class="btn">Update</button>
             </form>
         </div>
         <div th:if="${message}">
