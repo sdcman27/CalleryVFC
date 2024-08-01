@@ -26,10 +26,10 @@
     </script>
 </head>
 <body>
-    <div class="admin-container">
+    <div class="container">
         <h1>Admin Homepage</h1>
-        <nav class="primary-navigation admin-nav">
-            <ul class="admin-nav-links">
+        <nav class="primary-navigation">
+            <ul class="nav-links">
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">User Management &dtrif;</a>
                     <ul class="dropdown-content">
@@ -65,14 +65,14 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class="admin-btn admin-logout-btn" onclick="handleLogout(event)">Logout</a>
+                    <a href="#" class="logout-btn" onclick="handleLogout(event)">Logout</a>
                 </li>
             </ul>
         </nav>
 
-        <div class="admin-announcements">
+        <div class="announcements">
             <h2>Announcements</h2>
-            <div th:each="announcement : ${announcements}" class="admin-announcement-item">
+            <div th:each="announcement : ${announcements}" class="announcement-item">
                 <h3 th:text="${announcement.title}">Announcement Title</h3>
                 <p th:text="${announcement.content}">Announcement Content</p>
                 <p th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Announcement DateTime</p>
