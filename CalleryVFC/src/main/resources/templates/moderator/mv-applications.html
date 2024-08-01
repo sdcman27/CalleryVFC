@@ -4,10 +4,15 @@
     <title>Fireman Applications</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
-<body>
+<body>		
     <div class="container">
-        <h1>Fireman Applications</h1>
-        <table>
+		<h1>Moderator Homepage</h1>
+		        <nav class="primary-navigation nav">
+		            <ul class="nav-links">
+		                <li><a href="/moderator">Return to Homepage</a></li>
+		            </ul>
+		        </nav>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -26,6 +31,9 @@
                     <td th:text="${applications.address}"></td>
                     <td th:text="${applications.experience}"></td>
                     <td th:text="${applications.motivation}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(applications)}">
+                    <td colspan="6">No applications available.</td>
                 </tr>
             </tbody>
         </table>
