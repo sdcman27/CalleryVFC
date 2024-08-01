@@ -31,29 +31,29 @@
     </script>
 </head>
 <body>
-    <div class="fire-dept-container">
+    <div class="container">
         <h1>Update Announcement</h1>
-        <form th:action="@{/admin/av-announcements/update/{id}(id=${announcement.id})}" th:object="${announcement}" method="post" class="fire-dept-form" enctype="multipart/form-data">
-            <div class="fire-dept-form-group">
+        <form th:action="@{/admin/av-announcements/update/{id}(id=${announcement.id})}" th:object="${announcement}" method="post" class="form" enctype="multipart/form-data">
+            <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" id="title" th:field="*{title}" class="fire-dept-input" required/>
+                <input type="text" id="title" th:field="*{title}" class="input" required/>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="content">Content:</label>
-                <textarea id="content" th:field="*{content}" class="fire-dept-input" required></textarea>
+                <textarea id="content" th:field="*{content}" class="input" required></textarea>
             </div>
-            <div class="fire-dept-form-group">
+            <div class="form-group">
                 <label for="imageFile">Upload Image:</label>
-                <input type="file" id="imageFile" name="imageFile" class="fire-dept-input" accept="image/*"/>
+                <input type="file" id="imageFile" name="imageFile" class="input" accept="image/*"/>
             </div>
-            <div class="fire-dept-form-group">
-                <button type="button" class="fire-dept-btn" onclick="previewAnnouncement()">Preview</button>
+            <div class="form-group">
+                <button type="button" class="btn" onclick="previewAnnouncement()">Preview</button>
             </div>
-            <div class="fire-dept-form-group">
-                <button type="submit" class="fire-dept-btn">Update</button>
+            <div class="form-group">
+                <button type="submit" class="btn">Update</button>
             </div>
         </form>
-        <button onclick="history.back()" class="fire-dept-btn fire-dept-btn-secondary">Go Back</button>
+        <button onclick="history.back()" class="btn btn-secondary">Go Back</button>
     </div>
 </body>
 </html>
