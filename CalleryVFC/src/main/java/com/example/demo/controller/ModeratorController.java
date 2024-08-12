@@ -58,43 +58,43 @@ public class ModeratorController {
         return "redirect:/moderator/inquiries";
     }
     
-    @GetMapping("/announcements")
+    @GetMapping("/mv-announcements")
     public String viewAnnouncements(Model model) {
         List<Announcement> announcements = announcementService.getAllAnnouncements();
         model.addAttribute("announcements", announcements);
         return "moderator/mv-announcements";
     }
 
-    @GetMapping("/announcement/new")
+    @GetMapping("/mv-announcement/new")
     public String newAnnouncementForm(Model model) {
         model.addAttribute("announcement", new Announcement());
         return "moderator/mv-create_announcement";
     }
 
-    @PostMapping("/announcement")
+    @PostMapping("/mv-announcement")
     public String saveAnnouncement(@ModelAttribute Announcement announcement) {
         announcementService.saveAnnouncement(announcement);
-        return "redirect:/moderator/announcements";
+        return "redirect:/moderator/mv-announcements";
     }
 
-    @GetMapping("/announcement/edit/{id}")
+    @GetMapping("/mv-announcement/edit/{id}")
     public String editAnnouncementForm(@PathVariable Long id, Model model) {
         Announcement announcement = announcementService.getAnnouncementById(id);
         model.addAttribute("announcement", announcement);
         return "moderator/mv-edit_announcement";
     }
 
-    @PostMapping("/announcement/update/{id}")
+    @PostMapping("/mv-announcement/update/{id}")
     public String updateAnnouncement(@PathVariable Long id, @ModelAttribute Announcement announcement) {
         announcement.setId(id);
         announcementService.saveAnnouncement(announcement);
-        return "redirect:/moderator/announcements";
+        return "redirect:/moderator/mv-announcements";
     }
 
-    @PostMapping("/announcement/delete/{id}")
+    @PostMapping("/mv-announcement/delete/{id}")
     public String deleteAnnouncement(@PathVariable Long id) {
         announcementService.deleteAnnouncement(id);
-        return "redirect:/moderator/announcements";
+        return "redirect:/moderator/mv-announcements";
     }
     
     @GetMapping("/applications")
