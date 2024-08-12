@@ -20,6 +20,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+					<th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <tr th:each="announcement : ${announcements}">
                     <td th:text="${announcement.id}"></td>
                     <td th:text="${announcement.title}"></td>
+					<td th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Date</td>
                     <td>
                         <a th:href="@{/admin/av-announcements/edit/{id}(id=${announcement.id})}">Edit</a>
                         <a th:href="@{/admin/av-announcements/delete/{id}(id=${announcement.id})}" onclick="return confirm('Are you sure?')">Delete</a>
