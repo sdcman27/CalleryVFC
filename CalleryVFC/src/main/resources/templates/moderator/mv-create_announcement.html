@@ -3,34 +3,58 @@
 <head>
     <title>Create Announcement</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+	<script>
+		        function previewAnnouncement() {
+		            const title = document.getElementById('title').value;
+		            const content = document.getElementById('content').value;
+		            const fileInput = document.getElementById('imageFile');
+		            const file = fileInput.files[0];
+
+		            const previewWindow = window.open('', '_blank', 'width=600,height=400');
+		            previewWindow.document.write('<html><head><title>Preview Announcement</title></head><body>');
+		            previewWindow.document.write('<h1>' + title + '</h1>');
+		            previewWindow.document.write('<p>' + content + '</p>');
+
+		            if (file) {
+		                const reader = new FileReader();
+		                reader.onload = function (e) {
+		                    previewWindow.document.write('<img src="' + e.target.result + '" alt="Announcement Image" style="max-width: 100%;">');
+		                    previewWindow.document.write('</body></html>');
+		                    previewWindow.document.close();
+		                }
+		                reader.readAsDataURL(file);
+		            }  else {
+		                previewWindow.document.write('</body></html>');
+		                previewWindow.document.close();
+		            }
+		        }
+	</script>
 </head>
 <body>
-	 <div class="container">
-	        <h1>Create Announcement</h1>
-	        <form th:action="@{/moderator/announcement}" th:object="${announcement}" method="post">
-	            <div>
-	                <label for="title">Title:</label>
-	                <input type="text" id="title" th:field="*{title}" required />
-	            </div>
-	            <div>
-	                <label for="content">Content:</label>
-	                <textarea id="content" th:field="*{content}" required></textarea>
-	            </div>
-	            <div>
-	                <label for="dateTime">Date and Time:</label>
-	                <input type="datetime-local" id="dateTime" th:field="*{dateTime}" required />
-	            </div>
-	            <div>
-	                <label for="imageUrl">Image URL:</label>
-	                <input type="text" id="imageUrl" th:field="*{imageUrl}" />
-	            </div>
-	            <div>
-	                <button type="submit">Create Announcement</button>
-	            </div>
-	        </form>
-	    </div>
-	</body>
+    <div class="container">
+        <h1>Create Announcement</h1>
+        <form th:action="@{/moderator/mv-announcement}" th:object="${announcement}" method="post" class="form">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" th:field="*{title}" class="input" required />
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea id="content" th:field="*{content}" class="input" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dateTime">Date and Time:</label>
+                <input type="datetime-local" id="dateTime" th:field="*{dateTime}" class="input" required />
+            </div>
+			<div class="form-group">
+			    <label for="imageFile">Upload Image:</label>
+			    <input type="file" id="imageFile" name="imageFile" class="input" accept="image/*"/>
+			</div>
+            <div class="form-group">
+                <button type="submit" class="btn">Create Announcement</button>
+            </div>
+        </form>
+        <button onclick="history.back()" class="btn btn-secondary">Go Back</button>
+    </div>
 </body>
 </html>
