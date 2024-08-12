@@ -7,30 +7,38 @@
 <body>
     <div class="container">
         <h1>Manage Announcements</h1>
-        <a href="/moderator/announcement/new" class="btn btn-primary">Create New Announcement</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="announcement : ${announcements}">
-                    <td th:text="${announcement.title}">Title</td>
-                    <td th:text="${announcement.content}">Content</td>
-                    <td th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Date</td>
-                    <td>
-                        <a th:href="@{'/moderator/announcement/edit/' + ${announcement.id}}" class="btn btn-secondary">Edit</a>
-                        <form th:action="@{'/moderator/announcement/delete/' + ${announcement.id}}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <nav class="primary-navigation nav">
+            <ul class="nav-links">
+                <li><a href="/moderator">Return to Moderator Dashboard</a></li>
+                <li><a href="/moderator/mv-announcement/new">Create New Announcement</a></li>
+            </ul>
+        </nav>
+        <div class="announcement-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="announcement : ${announcements}">
+                        <td th:text="${announcement.title}">Title</td>
+                        <td th:text="${announcement.content}">Content</td>
+                        <td th:text="${#temporals.format(announcement.dateTime, 'yyyy-MM-dd HH:mm')}">Date</td>
+                        <td>
+                            <a th:href="@{/moderator/mv-announcement/edit/{id}(id=${announcement.id})}">Edit</a>
+                            <a th:href="@{/moderator/mv-announcement/delete/{id}(id=${announcement.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(announcements)}">
+                        <td colspan="4">No announcements available.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
